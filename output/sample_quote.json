@@ -1,0 +1,232 @@
+{
+  "quote_id": "c14de83e-cd3e-4e7e-b1d6-7689ba0aa1b9",
+  "created_at": "2025-08-27T23:44:12.396098",
+  "client_location": "Marseille",
+  "project_summary": "4.0sqm bathroom renovation in Marseille: plumbing, tiling, painting, install fixtures. Budget preference: budget-conscious.",
+  "zones": {
+    "bathroom": {
+      "name": "bathroom",
+      "area": 4.0,
+      "tasks": [
+        {
+          "name": "plumbing",
+          "task_type": "plumbing",
+          "description": "plumbing for 4.0sqm bathroom",
+          "labor": {
+            "hours": 30.0,
+            "rate": 45.0,
+            "total": 1350.0,
+            "skill_level": "skilled",
+            "workers_needed": 1
+          },
+          "materials": [
+            {
+              "name": "Standard toilet with cistern",
+              "category": "plumbing",
+              "quantity": 1.0,
+              "unit": "piece",
+              "unit_price": 180.0,
+              "total": 180.0,
+              "supplier": "Sanitaire Discount",
+              "availability_score": 0.92
+            },
+            {
+              "name": "Shower mixer tap",
+              "category": "plumbing",
+              "quantity": 1.0,
+              "unit": "piece",
+              "unit_price": 120.0,
+              "total": 120.0,
+              "supplier": "Grohe",
+              "availability_score": 0.85
+            },
+            {
+              "name": "15mm copper pipes",
+              "category": "plumbing",
+              "quantity": 10.0,
+              "unit": "m",
+              "unit_price": 8.5,
+              "total": 85.0,
+              "supplier": "Brico Dépôt",
+              "availability_score": 0.95
+            },
+            {
+              "name": "110mm PVC drain pipe",
+              "category": "plumbing",
+              "quantity": 3.0,
+              "unit": "m",
+              "unit_price": 5.2,
+              "total": 15.600000000000001,
+              "supplier": "Brico Dépôt",
+              "availability_score": 0.98
+            }
+          ],
+          "estimated_duration": "2-3 days",
+          "vat_rate": 0.1,
+          "vat_percentage": "10.0%",
+          "subtotal": 2013.1899999999998,
+          "vat_amount": 201.319,
+          "total_price": 2214.509,
+          "margin": 0.15,
+          "confidence_score": 0.7274999999999999,
+          "complexity_factor": 1.2
+        },
+        {
+          "name": "tiling",
+          "task_type": "tiling",
+          "description": "tiling for 4.0sqm bathroom",
+          "labor": {
+            "hours": 14.0,
+            "rate": 45.0,
+            "total": 630.0,
+            "skill_level": "skilled",
+            "workers_needed": 1
+          },
+          "materials": [
+            {
+              "name": "Standard ceramic floor tiles",
+              "category": "tiles",
+              "quantity": 4.0,
+              "unit": "sqm",
+              "unit_price": 25.0,
+              "total": 100.0,
+              "supplier": "Leroy Merlin",
+              "availability_score": 0.95
+            },
+            {
+              "name": "Wall tiles for bathroom",
+              "category": "tiles",
+              "quantity": 12.0,
+              "unit": "sqm",
+              "unit_price": 30.0,
+              "total": 360.0,
+              "supplier": "Point P",
+              "availability_score": 0.9
+            },
+            {
+              "name": "Tile adhesive",
+              "category": "consumables",
+              "quantity": 3.2,
+              "unit": "25kg bag",
+              "unit_price": 15.0,
+              "total": 48.0,
+              "supplier": "Weber",
+              "availability_score": 0.98
+            },
+            {
+              "name": "Tile grout",
+              "category": "consumables",
+              "quantity": 1.6,
+              "unit": "5kg bag",
+              "unit_price": 12.0,
+              "total": 19.200000000000003,
+              "supplier": "Mapei",
+              "availability_score": 0.95
+            }
+          ],
+          "estimated_duration": "1-2 days",
+          "vat_rate": 0.1,
+          "vat_percentage": "10.0%",
+          "subtotal": 1330.78,
+          "vat_amount": 133.078,
+          "total_price": 1463.858,
+          "margin": 0.15,
+          "confidence_score": 0.8435,
+          "complexity_factor": 1.0
+        },
+        {
+          "name": "painting",
+          "task_type": "painting",
+          "description": "painting for 4.0sqm bathroom",
+          "labor": {
+            "hours": 4.4,
+            "rate": 35.0,
+            "total": 154.0,
+            "skill_level": "semi-skilled",
+            "workers_needed": 1
+          },
+          "materials": [
+            {
+              "name": "Humidity-resistant bathroom paint",
+              "category": "paint",
+              "quantity": 1.0,
+              "unit": "2.5L",
+              "unit_price": 35.0,
+              "total": 35.0,
+              "supplier": "Dulux Valentine",
+              "availability_score": 0.93
+            },
+            {
+              "name": "Wall primer",
+              "category": "paint",
+              "quantity": 1.0,
+              "unit": "2.5L",
+              "unit_price": 25.0,
+              "total": 25.0,
+              "supplier": "Dulux Valentine",
+              "availability_score": 0.95
+            }
+          ],
+          "estimated_duration": "1 day",
+          "vat_rate": 0.1,
+          "vat_percentage": "10.0%",
+          "subtotal": 246.1,
+          "vat_amount": 24.61,
+          "total_price": 270.71,
+          "margin": 0.15,
+          "confidence_score": 0.9304,
+          "complexity_factor": 1.0
+        },
+        {
+          "name": "install fixtures",
+          "task_type": "fixtures",
+          "description": "install fixtures for 4.0sqm bathroom",
+          "labor": {
+            "hours": 6.0,
+            "rate": 45.0,
+            "total": 270.0,
+            "skill_level": "skilled",
+            "workers_needed": 1
+          },
+          "materials": [
+            {
+              "name": "Bathroom vanity with sink",
+              "category": "fixtures",
+              "quantity": 1.0,
+              "unit": "piece",
+              "unit_price": 350.0,
+              "total": 350.0,
+              "supplier": "IKEA",
+              "availability_score": 0.88
+            },
+            {
+              "name": "IP44 bathroom light fixture",
+              "category": "electrical",
+              "quantity": 1.0,
+              "unit": "piece",
+              "unit_price": 45.0,
+              "total": 45.0,
+              "supplier": "Castorama",
+              "availability_score": 0.9
+            }
+          ],
+          "estimated_duration": "1 day",
+          "vat_rate": 0.1,
+          "vat_percentage": "10.0%",
+          "subtotal": 764.7499999999999,
+          "vat_amount": 76.475,
+          "total_price": 841.2249999999999,
+          "margin": 0.15,
+          "confidence_score": 0.8340000000000001,
+          "complexity_factor": 1.0
+        }
+      ],
+      "zone_total": 4790.302,
+      "zone_confidence": 0.83385
+    }
+  },
+  "global_confidence_score": 0.95625,
+  "total_before_vat": 4354.82,
+  "total_vat": 435.48199999999997,
+  "grand_total": 4790.302
+}

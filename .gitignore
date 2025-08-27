@@ -50,6 +50,3 @@ Thumbs.db
 # Logs
 *.log
 
-# Generated output (keep folder but not files)
-output/*.json
-!output/.gitkeep
