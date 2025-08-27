@@ -1,5 +1,7 @@
 from typing import Dict, Tuple
+import json
 from src.models import Labor, TaskType
+from src.openai_client import openai_client, DEFAULT_MODEL
 
 
 class LaborCalculator:
@@ -12,6 +14,8 @@ class LaborCalculator:
             "skilled": 1.3,
             "specialist": 1.6
         }
+        # Cache for OpenAI task name mappings to avoid repeated API calls
+        self._task_mapping_cache = {}
 
     def _initialize_rates(self) -> Dict[str, float]:
         return {
@@ -152,9 +156,62 @@ class LaborCalculator:
         )
 
     def _normalize_task_name(self, task_name: str) -> str:
-        task_name_lower = task_name.lower()
+        task_name_lower = task_name.lower().strip()
 
-        # Map common variations to standard keys
+        # Check cache first
+        if task_name_lower in self._task_mapping_cache:
+            return self._task_mapping_cache[task_name_lower]
+
+        # Get available task keys from our estimates
+        available_tasks = list(self.task_estimates.keys())
+
+        # Create a prompt for OpenAI to map the task name
+        prompt = f"""
+You are a construction task classifier. Given a task description, map it to the most appropriate standard task category.
+
+Available standard task categories:
+{', '.join(available_tasks)}
+
+Task to classify: "{task_name}"
+
+Instructions:
+- Return only the exact matching category name from the available list
+- If the task clearly matches a category, return that category
+- If no clear match exists, return the original task name in lowercase
+- Consider synonyms and common variations (e.g., "demo" -> "demolition", "paint job" -> "painting")
+
+Response format: Return only the category name, nothing else.
+"""
+
+        try:
+            response = openai_client.chat.completions.create(
+                model=DEFAULT_MODEL,
+                messages=[
+                    {"role": "system", "content": "You are a helpful construction task classifier. Return only the category name."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.1,  # Low temperature for consistent results
+                max_tokens=50
+            )
+
+            mapped_task = response.choices[0].message.content.strip().lower()
+
+            if mapped_task in available_tasks:
+                self._task_mapping_cache[task_name_lower] = mapped_task
+                return mapped_task
+            else:
+                self._task_mapping_cache[task_name_lower] = task_name_lower
+                return task_name_lower
+
+        except Exception as e:
+            print(f"OpenAI mapping failed for task '{task_name}': {e}")
+            fallback_result = self._fallback_normalize_task_name(
+                task_name_lower)
+            # Cache the fallback result
+            self._task_mapping_cache[task_name_lower] = fallback_result
+            return fallback_result
+
+    def _fallback_normalize_task_name(self, task_name: str) -> str:
         mapping = {
             "remove tiles": "tile_removal",
             "tile removal": "tile_removal",
@@ -184,7 +241,7 @@ class LaborCalculator:
             "install toilet": "fixture_installation"
         }
 
-        return mapping.get(task_name_lower, task_name_lower)
+        return mapping.get(task_name, task_name)
 
     def _calculate_hours(self, task_key: str, area: float,
                          complexity: str, task_data: Dict) -> float:

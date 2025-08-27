@@ -8,20 +8,20 @@ from src.pricing.labor_calc import LaborCalculator
 from src.pricing.vat_rules import VATCalculator
 from src.pricing.confidence import ConfidenceScorer
 from src.transcript.analyzer import TranscriptAnalyzer
+from src.openai_client import openai_client, DEFAULT_MODEL
 
 
 class DonizoPricingEngine:
-    def __init__(self, openai_api_key: Optional[str] = None):
+    def __init__(self):
         self.material_db = MaterialDatabase()
         self.labor_calc = LaborCalculator()
         self.vat_calc = VATCalculator()
         self.confidence_scorer = ConfidenceScorer()
-        self.transcript_analyzer = TranscriptAnalyzer(openai_api_key)
+        self.transcript_analyzer = TranscriptAnalyzer()
 
     def generate_quote_from_transcript(self, transcript: str,
                                        override_location: Optional[str] = None) -> Quote:
         analysis = self.transcript_analyzer.analyze_transcript(transcript)
-
         if override_location:
             analysis.location = override_location
 
@@ -151,8 +151,8 @@ Please classify these renovation tasks:
 Return only valid JSON.
 """
 
-            response = self.transcript_analyzer.client.chat.completions.create(
-                model=self.transcript_analyzer.model,
+            response = openai_client.chat.completions.create(
+                model=DEFAULT_MODEL,
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}
@@ -213,8 +213,8 @@ Generate default renovation tasks for this project:
 Return only a JSON array.
 """
 
-            response = self.transcript_analyzer.client.chat.completions.create(
-                model=self.transcript_analyzer.model,
+            response = openai_client.chat.completions.create(
+                model=DEFAULT_MODEL,
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}

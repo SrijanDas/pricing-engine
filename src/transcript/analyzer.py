@@ -1,25 +1,22 @@
 import os
 import json
 from typing import Dict, List, Optional
-from openai import OpenAI
 from src.models import TranscriptAnalysis
+from src.openai_client import openai_client, DEFAULT_MODEL
 import re
 
 
 class TranscriptAnalyzer:
-    def __init__(self, api_key: Optional[str] = None):
-        self.client = OpenAI(
-            api_key=api_key or os.getenv("OPENAI_API_KEY")
-        )
-        self.model = "gpt-4o-mini"
+    def __init__(self):
+        pass
 
     def analyze_transcript(self, transcript: str) -> TranscriptAnalysis:
         try:
             system_prompt = self._get_system_prompt()
             user_prompt = self._get_user_prompt(transcript)
 
-            response = self.client.chat.completions.create(
-                model=self.model,
+            response = openai_client.chat.completions.create(
+                model=DEFAULT_MODEL,
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt}

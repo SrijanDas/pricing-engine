@@ -1,6 +1,6 @@
 {
-  "quote_id": "c14de83e-cd3e-4e7e-b1d6-7689ba0aa1b9",
-  "created_at": "2025-08-27T23:44:12.396098",
+  "quote_id": "e960258d-1159-4701-9c88-3cd080b6e3e6",
+  "created_at": "2025-08-28T00:27:25.715387",
   "client_location": "Marseille",
   "project_summary": "4.0sqm bathroom renovation in Marseille: plumbing, tiling, painting, install fixtures. Budget preference: budget-conscious.",
   "zones": {
@@ -182,51 +182,30 @@
           "task_type": "fixtures",
           "description": "install fixtures for 4.0sqm bathroom",
           "labor": {
-            "hours": 6.0,
+            "hours": 8.0,
             "rate": 45.0,
-            "total": 270.0,
+            "total": 360.0,
             "skill_level": "skilled",
             "workers_needed": 1
           },
-          "materials": [
-            {
-              "name": "Bathroom vanity with sink",
-              "category": "fixtures",
-              "quantity": 1.0,
-              "unit": "piece",
-              "unit_price": 350.0,
-              "total": 350.0,
-              "supplier": "IKEA",
-              "availability_score": 0.88
-            },
-            {
-              "name": "IP44 bathroom light fixture",
-              "category": "electrical",
-              "quantity": 1.0,
-              "unit": "piece",
-              "unit_price": 45.0,
-              "total": 45.0,
-              "supplier": "Castorama",
-              "availability_score": 0.9
-            }
-          ],
+          "materials": [],
           "estimated_duration": "1 day",
           "vat_rate": 0.1,
           "vat_percentage": "10.0%",
-          "subtotal": 764.7499999999999,
-          "vat_amount": 76.475,
-          "total_price": 841.2249999999999,
+          "subtotal": 413.99999999999994,
+          "vat_amount": 41.4,
+          "total_price": 455.3999999999999,
           "margin": 0.15,
-          "confidence_score": 0.8340000000000001,
+          "confidence_score": 0.799,
           "complexity_factor": 1.0
         }
       ],
-      "zone_total": 4790.302,
-      "zone_confidence": 0.83385
+      "zone_total": 4404.477,
+      "zone_confidence": 0.8251
     }
   },
-  "global_confidence_score": 0.95625,
-  "total_before_vat": 4354.82,
-  "total_vat": 435.48199999999997,
-  "grand_total": 4790.302
+  "global_confidence_score": 0.9574,
+  "total_before_vat": 4004.0699999999997,
+  "total_vat": 400.407,
+  "grand_total": 4404.477
 }

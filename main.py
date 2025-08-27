@@ -22,7 +22,8 @@ def main():
         print()
 
     print("Initializing Donizo Pricing Engine...")
-    engine = DonizoPricingEngine(openai_api_key=api_key)
+
+    engine = DonizoPricingEngine()
     print("Engine initialized successfully!")
     print()
 
