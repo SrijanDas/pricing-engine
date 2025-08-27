@@ -6,7 +6,7 @@ A pricing engine for bathroom renovations that transforms voice transcripts into
 
 -   Voice transcript analysis using OpenAI GPT
 -   Modular pricing system with material costs, labor calculations, and VAT rules
--   Confidence scoring for pricing accuracy
+-   Confidence scoring
 
 ## Quick Start
 
@@ -20,7 +20,7 @@ A pricing engine for bathroom renovations that transforms voice transcripts into
 1. Clone the repository:
 
 ```bash
-git clone <your-repo>
+git clone https://github.com/SrijanDas/pricing-engine
 cd donizo-pricing-engine
 ```
 
@@ -44,87 +44,101 @@ cp .env.example .env
 uv run python main.py
 ```
 
-## Output Schema
-
-The system generates quotes following this structure:
-
-```json
-{
-    "quote_id": "unique_identifier",
-    "client_location": "city_name",
-    "project_summary": "description",
-    "zones": {
-        "bathroom": {
-            "tasks": [
-                {
-                    "name": "task_name",
-                    "labor": { "hours": 8, "rate": 45, "total": 360 },
-                    "materials": [
-                        {
-                            "name": "item",
-                            "quantity": 10,
-                            "unit_price": 25,
-                            "total": 250
-                        }
-                    ],
-                    "vat_rate": 0.2,
-                    "estimated_duration": "1-2 days",
-                    "subtotal": 610,
-                    "vat_amount": 122,
-                    "total_price": 732,
-                    "margin": 0.15,
-                    "confidence_score": 0.85
-                }
-            ]
-        }
-    },
-    "global_confidence_score": 0.82,
-    "total_before_vat": 5000,
-    "total_vat": 1000,
-    "grand_total": 6000
-}
-```
-
 ## Pricing Logic
+
+The system calculates renovation costs using four main components that work together to produce accurate quotes.
 
 ### Material Costs
 
--   Database of standard materials with base prices
--   Supplier markup (5-15% depending on availability)
+The system maintains a comprehensive database of bathroom renovation materials including tiles, plumbing fixtures, electrical components, and consumables. Each material has:
+
+-   Base prices from real French suppliers (Leroy Merlin, Point P, etc.)
+-   Different quality variants (basic, premium, luxury) with appropriate pricing multipliers
+-   Availability scores that reflect current market conditions
+-   Coverage calculations to determine exact quantities needed
+
+The system automatically selects materials based on the customer's budget preference and calculates quantities based on room dimensions.
 
 ### Labor Calculations
 
--   Skilled vs. unskilled hourly rates
--   Task complexity multipliers
+Labor costs are calculated using a sophisticated hourly rate system:
 
-### VAT Rules
+-   Four skill levels: Unskilled (25€/hr), Semi-skilled (35€/hr), Skilled (45€/hr), Specialist (65€/hr)
+-   Task-specific time estimates based on industry standards
+-   Complexity multipliers that adjust time estimates based on project difficulty
+-   OpenAI integration to automatically classify tasks into appropriate categories
 
--   Standard rate: 20%
--   Reduced rate: 10% for renovation work (under certain conditions)
--   Zero rate: 0% for specific accessibility improvements
+For example, tiling work uses skilled labor at 45€/hr with 2.5 hours per square meter as the base rate, then applies complexity multipliers.
+
+### VAT Rules (French Tax System)
+
+The system automatically applies the correct French VAT rates based on work type:
+
+| **Type of Work**                                   | **VAT Rate** | **Conditions**                                    |
+| -------------------------------------------------- | ------------ | ------------------------------------------------- |
+| New construction, extensions, non-residential work | 20%          | Standard rate applies                             |
+| Renovation, maintenance, transformation (home >2y) | 10%          | Reduced rate for existing homes                   |
+| Energy-efficiency renovation (insulation, heating) | 5.5%         | Requires certified equipment and VAT certificates |
+| Gas/oil boiler installation (from 2025)            | 20%          | Standard rate even for energy-efficiency projects |
 
 ### Margin Protection
 
--   Minimum 15% margin on all quotes
--   Risk adjustment based on project complexity
--   Confidence-based margin scaling
+The system ensures profitability through dynamic margin calculations:
 
-## Confidence Scoring
+-   Base margin of 15% on all quotes (industry minimum)
+-   Complexity adjustments: Simple (0%), Moderate (+2%), Complex (+5%)
+-   Budget-based adjustments: Budget-conscious (-2%), Premium (+5%), Luxury (+10%)
+-   Final margins are capped between 15% and 30% to remain competitive
 
-The system evaluates quote reliability based on:
+## Confidence Scoring System
 
--   Input clarity (0.0-1.0)
--   Material availability (0.0-1.0)
--   Labor estimate accuracy (0.0-1.0)
--   Market price stability (0.0-1.0)
+The confidence scoring system evaluates how reliable each quote is by analyzing multiple factors and producing a score from 0.0 to 1.0.
 
-**Confidence Levels:**
+### How Confidence is Calculated
 
--   0.9-1.0: Very High (ready to quote)
--   0.8-0.89: High (minor clarifications needed)
--   0.7-0.79: Medium (requires review)
--   0.6-0.69: Low (needs significant input)
--   <0.6: Very Low (insufficient data)
+The system uses three weighted components:
+
+-   **Input Clarity (40% weight)**: How clear and complete the project requirements are
+-   **Material Availability (30% weight)**: Current availability and price stability of required materials
+-   **Labor Accuracy (30% weight)**: How well the labor estimates match the actual work needed
+
+### Input Clarity Scoring
+
+This measures how well we understand what the customer wants:
+
+-   Room dimensions provided: adds clarity
+-   Clear task descriptions: improves score
+-   Budget information specified: reduces uncertainty
+-   Timeline requirements: helps with planning
+-   Material preferences: enables better matching
+
+### Material Availability Scoring
+
+This evaluates supply chain reliability:
+
+-   Current supplier stock levels
+-   Price stability over recent months
+-   Supplier reliability ratings
+-   Seasonal availability factors
+
+### Labor Accuracy Scoring
+
+This assesses how confident we are in our time estimates:
+
+-   Task standardization: how common/routine the work is
+-   Complexity assessment accuracy: how well we understand difficulty
+-   Local labor data availability: access to regional rates
+-   Skill requirement clarity: understanding what expertise is needed
+
+### Confidence Levels and Actions
+
+The final confidence score determines how to proceed:
+
+-   **0.9-1.0 Very High**: Quote is ready to send, high accuracy expected
+-   **0.8-0.89 High**: Minor clarifications may be needed, generally reliable
+-   **0.7-0.79 Medium**: Review recommended, add 5-10% contingency
+-   **0.6-0.69 Low**: Detailed review required, consider site visit
+-   **Below 0.6 Very Low**: Do not quote without additional information
 
 ## Future Enhancements
 
