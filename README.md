@@ -72,7 +72,7 @@ For example, tiling work uses skilled labor at 45€/hr with 2.5 hours per squar
 
 ### VAT Rules
 
-The system automatically applies the correct French VAT rates based on work type:
+The system automatically applies the correct VAT rates based on work type:
 
 | **Type of Work**                                   | **VAT Rate** | **Conditions**                                    |
 | -------------------------------------------------- | ------------ | ------------------------------------------------- |
