@@ -70,7 +70,7 @@ Labor costs are calculated using a sophisticated hourly rate system:
 
 For example, tiling work uses skilled labor at 45€/hr with 2.5 hours per square meter as the base rate, then applies complexity multipliers.
 
-### VAT Rules (French Tax System)
+### VAT Rules
 
 The system automatically applies the correct French VAT rates based on work type:
 
