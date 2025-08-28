@@ -1,6 +1,6 @@
 # Donizo Pricing Engine
 
-A pricing engine for bathroom renovations that transforms voice transcripts into structured, professional renovation quotes.
+A pricing engine that transforms voice transcripts into structured, professional renovation quotes.
 
 ## Features
 
@@ -50,7 +50,7 @@ The system calculates renovation costs using four main components that work toge
 
 ### Material Costs
 
-The system maintains a comprehensive database of bathroom renovation materials including tiles, plumbing fixtures, electrical components, and consumables. Each material has:
+The system maintains a comprehensive database of materials, including tiles, plumbing fixtures, electrical components, and consumables. Each material has:
 
 -   Mock data for material prices can be found in `src\pricing\material_db.py`
 -   Different quality variants (basic, premium, luxury) with appropriate pricing multipliers
