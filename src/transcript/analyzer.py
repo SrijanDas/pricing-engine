@@ -46,7 +46,7 @@ class TranscriptAnalyzer:
 
     def _get_system_prompt(self) -> str:
         return """
-You are an expert renovation analyst for Donizo, a French renovation company. 
+You are an expert renovation analyst. 
 Your job is to analyze voice transcripts from clients describing their renovation needs and extract structured information.
 
 You must respond with a JSON object containing these fields:
