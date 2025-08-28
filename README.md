@@ -52,7 +52,7 @@ The system calculates renovation costs using four main components that work toge
 
 The system maintains a comprehensive database of bathroom renovation materials including tiles, plumbing fixtures, electrical components, and consumables. Each material has:
 
--   Base prices from real French suppliers (Leroy Merlin, Point P, etc.)
+-   Mock data for material prices can be found in `src\pricing\material_db.py`
 -   Different quality variants (basic, premium, luxury) with appropriate pricing multipliers
 -   Availability scores that reflect current market conditions
 -   Coverage calculations to determine exact quantities needed
